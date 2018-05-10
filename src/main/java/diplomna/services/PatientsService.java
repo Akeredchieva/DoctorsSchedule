@@ -42,8 +42,8 @@ public class PatientsService {
     public List<diplomna.model.Patient> findAllPatients(){
         List<diplomna.model.Patient> patientTOS = new ArrayList<>();
         patientRepository.findAll().forEach(patients -> {
-           patientTOS.add(new diplomna.model.Patient(patients.getId(),patients.getFirstName(),patients.getMiddleName(),
-                   patients.getLastName(),patients.getEgn(), patients.getAddress(), patients.getEmail()));
+           patientTOS.add(new diplomna.model.Patient(patients.getId(),patients.getFirstName(),patients.getLastName(),
+                   patients.getMiddleName(),patients.getEmail(),patients.getPhone(), patients.getAddress(),patients.getEgn() ));
         });
         return  patientTOS;
     }

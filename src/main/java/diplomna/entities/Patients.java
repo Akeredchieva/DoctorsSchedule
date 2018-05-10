@@ -27,6 +27,9 @@ public class Patients implements Serializable {
     @Column(name = "last_name",nullable = false)
     private String lastName;
 
+    @Column(name = "phone_number",nullable = false)
+    private String phone;
+
     @Column(nullable = false)
     private String EGN;
 
@@ -175,5 +178,13 @@ public class Patients implements Serializable {
 
     public void setDoctors(List<Doctors> doctors) {
         this.doctors = doctors;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }
