@@ -38,10 +38,9 @@ public class PatientsApiController implements PatientsApi {
         this.request = request;
     }
 
-    public ResponseEntity<Void> addPatients(@ApiParam(value = "Patients object that needs to be added in our application " ,required=true )  @Valid @RequestBody PatientTO body) {
-        String accept = request.getHeader("Accept");
-        //patientsService.createPatients();
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+    public ResponseEntity<Void> addPatients(@ApiParam(value = "Patients object that needs to be added in our application " ,required=true )  @Valid @RequestBody PatientTO patientTO) {
+        patientsService.createPatients(patientTO);
+        return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
 
     public ResponseEntity<List<PatientTO>> patientsGet() {
@@ -82,13 +81,10 @@ public class PatientsApiController implements PatientsApi {
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<PatientTO> patientsPatientIdGet(@ApiParam(value = "",required=true) @PathVariable("patientId") Long patientId) {
-        String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/xhtml")) {
-           // patientsService.findOnPatient()
-        }
-
-        return new ResponseEntity<PatientTO>(HttpStatus.BAD_REQUEST);
+    public ResponseEntity<PatientTO> patientsPatientIdGet(@ApiParam(value = "",required=true) @PathVariable("patientId") Integer patientId) {
+        // patientsService.findOnPatient()
+        PatientTO patient = patientsService.findOnPatient(patientId);
+        return new ResponseEntity<PatientTO>(patient, HttpStatus.BAD_REQUEST);
     }
 
     public ResponseEntity<Void> patientsPatientIdPut(@ApiParam(value = "Patients object that needs to be added in our application " ,required=true )  @Valid @RequestBody PatientTO body, @ApiParam(value = "",required=true) @PathVariable("patientId") Long patientId) {

@@ -98,7 +98,7 @@ public interface PatientsApi {
     @RequestMapping(value = "/patients/{patientId}",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
-    ResponseEntity<PatientTO> patientsPatientIdGet(@ApiParam(value = "",required=true) @PathVariable("patientId") Long patientId);
+    ResponseEntity<PatientTO> patientsPatientIdGet(@ApiParam(value = "",required=true) @PathVariable("patientId") Integer patientId);
 
 
     @ApiOperation(value = "Update a new patients", nickname = "patientsPatientIdPut", notes = "With this method we want to create a new patient in our application", tags={ "Patients", })

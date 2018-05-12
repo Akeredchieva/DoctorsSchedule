@@ -29,14 +29,6 @@ public class PatientsServiceImpl implements PatientService {
     // TODO: return PatientTo with ID
     @Override
     public void createPatients(PatientTO patientTO){
-        String firstName =  patientTO.getFirstName();
-        String middleName = patientTO.getMiddleName();
-        String lastName = patientTO.getLastName();
-        String address  = patientTO.getAddress();
-        String email = patientTO.getEmail();
-
-//        Patients patients = new Patients(firstName,middleName,lastName, patientTO.getEgn(),address, email,
-//                Collections.emptyList());
         Patients patients = PatientConverter.F.toEntity(patientTO);
         patientRepository.save(patients);
     }
@@ -69,7 +61,7 @@ public class PatientsServiceImpl implements PatientService {
     @Override
     public PatientTO findOnPatient(Integer id){
         Patients patients = patientRepository.findOne(id);
-        return (new PatientTO(patients.getId(),patients.getFirstName(),patients.getLastName(),patients.getMiddleName(),patients.getEmail(),patients.getPhone(),patients.getAddress(),patients.getEgn()));
+        return (PatientConverter.F.toTransfer(patients));
 
     }
 }

@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import org.springframework.validation.annotation.Validated;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * PatientTO
  */
@@ -19,24 +21,31 @@ public class PatientTO {
   private Integer patientId = null;
 
   @JsonProperty("firstName")
+  @NotNull
   private String firstName = null;
 
   @JsonProperty("lastName")
+  @NotNull
   private String lastName = null;
 
   @JsonProperty("middleName")
+  @NotNull
   private String middleName = null;
 
   @JsonProperty("email")
+  @NotNull
   private String email = null;
 
   @JsonProperty("telephone")
+  @NotNull
   private String telephone = null;
 
   @JsonProperty("address")
+  @NotNull
   private String address = null;
 
   @JsonProperty("egn")
+  @NotNull
   private String egn = null;
 
   public PatientTO patientId(Integer patientId) {
