@@ -2,20 +2,16 @@ package diplomna.model;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.validation.annotation.Validated;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
 
 /**
- * Diseases
+ * DiseasesTO
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-05-06T12:51:14.120Z")
 
-public class Diseases   {
+public class DiseasesTO {
   @JsonProperty("name")
   private String name = null;
 
@@ -25,7 +21,7 @@ public class Diseases   {
   @JsonProperty("description")
   private String description = null;
 
-  public Diseases name(String name) {
+  public DiseasesTO name(String name) {
     this.name = name;
     return this;
   }
@@ -45,7 +41,7 @@ public class Diseases   {
     this.name = name;
   }
 
-  public Diseases dateOfDiagnose(String dateOfDiagnose) {
+  public DiseasesTO dateOfDiagnose(String dateOfDiagnose) {
     this.dateOfDiagnose = dateOfDiagnose;
     return this;
   }
@@ -65,7 +61,7 @@ public class Diseases   {
     this.dateOfDiagnose = dateOfDiagnose;
   }
 
-  public Diseases description(String description) {
+  public DiseasesTO description(String description) {
     this.description = description;
     return this;
   }
@@ -94,10 +90,10 @@ public class Diseases   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Diseases diseases = (Diseases) o;
-    return Objects.equals(this.name, diseases.name) &&
-        Objects.equals(this.dateOfDiagnose, diseases.dateOfDiagnose) &&
-        Objects.equals(this.description, diseases.description);
+    DiseasesTO diseasesTO = (DiseasesTO) o;
+    return Objects.equals(this.name, diseasesTO.name) &&
+        Objects.equals(this.dateOfDiagnose, diseasesTO.dateOfDiagnose) &&
+        Objects.equals(this.description, diseasesTO.description);
   }
 
   @Override
@@ -108,7 +104,7 @@ public class Diseases   {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Diseases {\n");
+    sb.append("class DiseasesTO {\n");
     
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    dateOfDiagnose: ").append(toIndentedString(dateOfDiagnose)).append("\n");

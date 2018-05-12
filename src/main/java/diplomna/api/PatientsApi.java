@@ -5,22 +5,16 @@
  */
 package diplomna.api;
 
-import diplomna.model.Diseases;
-import diplomna.model.Patient;
+import diplomna.model.DiseasesTO;
+import diplomna.model.PatientTO;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
-import javax.validation.constraints.*;
 import java.util.List;
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-05-06T12:51:14.120Z")
 
@@ -34,17 +28,17 @@ public interface PatientsApi {
         produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.POST)
-    ResponseEntity<Void> addPatients(@ApiParam(value = "Patients object that needs to be added in our application " ,required=true )  @Valid @RequestBody Patient body);
+    ResponseEntity<Void> addPatients(@ApiParam(value = "Patients object that needs to be added in our application " ,required=true )  @Valid @RequestBody PatientTO body);
 
 
-    @ApiOperation(value = "GET all patients", nickname = "patientsGet", notes = "", response = Patient.class, responseContainer = "List", tags={ "Patients", })
+    @ApiOperation(value = "GET all patients", nickname = "patientsGet", notes = "", response = PatientTO.class, responseContainer = "List", tags={ "Patients", })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "An array of patient", response = Patient.class, responseContainer = "List"),
+        @ApiResponse(code = 200, message = "An array of patient", response = PatientTO.class, responseContainer = "List"),
         @ApiResponse(code = 200, message = "Unexpected error", response = Error.class) })
     @RequestMapping(value = "/patients",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
-    ResponseEntity<List<Patient>> patientsGet();
+    ResponseEntity<List<PatientTO>> patientsGet();
 
 
     @ApiOperation(value = "Delete the current patient", nickname = "patientsPatientIdDelete", notes = "With this methow we will be able to delete a current patient", tags={ "Patients", })
@@ -74,17 +68,17 @@ public interface PatientsApi {
         produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.PUT)
-    ResponseEntity<Void> patientsPatientIdDiseasesDiseasedIdPut(@ApiParam(value = "Disease object that needs to be added in our application " ,required=true )  @Valid @RequestBody Diseases body,@ApiParam(value = "",required=true) @PathVariable("patientId") Long patientId,@ApiParam(value = "",required=true) @PathVariable("diseasedId") Long diseasedId);
+    ResponseEntity<Void> patientsPatientIdDiseasesDiseasedIdPut(@ApiParam(value = "Disease object that needs to be added in our application " ,required=true )  @Valid @RequestBody DiseasesTO body, @ApiParam(value = "",required=true) @PathVariable("patientId") Long patientId, @ApiParam(value = "",required=true) @PathVariable("diseasedId") Long diseasedId);
 
 
-    @ApiOperation(value = "", nickname = "patientsPatientIdDiseasesGet", notes = "", response = Diseases.class, responseContainer = "List", tags={ "Patients", })
+    @ApiOperation(value = "", nickname = "patientsPatientIdDiseasesGet", notes = "", response = DiseasesTO.class, responseContainer = "List", tags={ "Patients", })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation", response = Diseases.class, responseContainer = "List"),
+        @ApiResponse(code = 200, message = "successful operation", response = DiseasesTO.class, responseContainer = "List"),
         @ApiResponse(code = 200, message = "Unexpected error", response = Error.class) })
     @RequestMapping(value = "/patients/{patientId}/diseases",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
-    ResponseEntity<List<Diseases>> patientsPatientIdDiseasesGet(@ApiParam(value = "",required=true) @PathVariable("patientId") Long patientId);
+    ResponseEntity<List<DiseasesTO>> patientsPatientIdDiseasesGet(@ApiParam(value = "",required=true) @PathVariable("patientId") Long patientId);
 
 
     @ApiOperation(value = "Create a new disease", nickname = "patientsPatientIdDiseasesPost", notes = "With this method we want to create a new disease for specific patient in our application", tags={ "Patients", })
@@ -94,17 +88,17 @@ public interface PatientsApi {
         produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.POST)
-    ResponseEntity<Void> patientsPatientIdDiseasesPost(@ApiParam(value = "Disease object that needs to be added in our application " ,required=true )  @Valid @RequestBody Diseases body,@ApiParam(value = "",required=true) @PathVariable("patientId") Long patientId);
+    ResponseEntity<Void> patientsPatientIdDiseasesPost(@ApiParam(value = "Disease object that needs to be added in our application " ,required=true )  @Valid @RequestBody DiseasesTO body, @ApiParam(value = "",required=true) @PathVariable("patientId") Long patientId);
 
 
-    @ApiOperation(value = "", nickname = "patientsPatientIdGet", notes = "", response = Patient.class, tags={ "Patients", })
+    @ApiOperation(value = "", nickname = "patientsPatientIdGet", notes = "", response = PatientTO.class, tags={ "Patients", })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "successful operation", response = Patient.class),
+        @ApiResponse(code = 200, message = "successful operation", response = PatientTO.class),
         @ApiResponse(code = 200, message = "Unexpected error", response = Error.class) })
     @RequestMapping(value = "/patients/{patientId}",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
-    ResponseEntity<Patient> patientsPatientIdGet(@ApiParam(value = "",required=true) @PathVariable("patientId") Long patientId);
+    ResponseEntity<PatientTO> patientsPatientIdGet(@ApiParam(value = "",required=true) @PathVariable("patientId") Long patientId);
 
 
     @ApiOperation(value = "Update a new patients", nickname = "patientsPatientIdPut", notes = "With this method we want to create a new patient in our application", tags={ "Patients", })
@@ -114,6 +108,6 @@ public interface PatientsApi {
         produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.PUT)
-    ResponseEntity<Void> patientsPatientIdPut(@ApiParam(value = "Patients object that needs to be added in our application " ,required=true )  @Valid @RequestBody Patient body,@ApiParam(value = "",required=true) @PathVariable("patientId") Long patientId);
+    ResponseEntity<Void> patientsPatientIdPut(@ApiParam(value = "Patients object that needs to be added in our application " ,required=true )  @Valid @RequestBody PatientTO body, @ApiParam(value = "",required=true) @PathVariable("patientId") Long patientId);
 
 }

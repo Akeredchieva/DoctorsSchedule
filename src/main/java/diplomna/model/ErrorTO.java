@@ -2,20 +2,16 @@ package diplomna.model;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.validation.annotation.Validated;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
 
 /**
- * Error
+ * ErrorTO
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-05-06T12:51:14.120Z")
 
-public class Error   {
+public class ErrorTO {
   @JsonProperty("code")
   private Integer code = null;
 
@@ -25,7 +21,7 @@ public class Error   {
   @JsonProperty("fields")
   private String fields = null;
 
-  public Error code(Integer code) {
+  public ErrorTO code(Integer code) {
     this.code = code;
     return this;
   }
@@ -45,7 +41,7 @@ public class Error   {
     this.code = code;
   }
 
-  public Error message(String message) {
+  public ErrorTO message(String message) {
     this.message = message;
     return this;
   }
@@ -65,7 +61,7 @@ public class Error   {
     this.message = message;
   }
 
-  public Error fields(String fields) {
+  public ErrorTO fields(String fields) {
     this.fields = fields;
     return this;
   }
@@ -94,10 +90,10 @@ public class Error   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Error error = (Error) o;
-    return Objects.equals(this.code, error.code) &&
-        Objects.equals(this.message, error.message) &&
-        Objects.equals(this.fields, error.fields);
+    ErrorTO errorTO = (ErrorTO) o;
+    return Objects.equals(this.code, errorTO.code) &&
+        Objects.equals(this.message, errorTO.message) &&
+        Objects.equals(this.fields, errorTO.fields);
   }
 
   @Override
@@ -108,7 +104,7 @@ public class Error   {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Error {\n");
+    sb.append("class ErrorTO {\n");
     
     sb.append("    code: ").append(toIndentedString(code)).append("\n");
     sb.append("    message: ").append(toIndentedString(message)).append("\n");

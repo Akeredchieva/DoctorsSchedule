@@ -2,21 +2,17 @@ package diplomna.model;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
 
 /**
- * Patient
+ * PatientTO
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-05-06T12:51:14.120Z")
 @AllArgsConstructor
-public class Patient   {
+public class PatientTO {
   @JsonProperty("patient_id")
   private Integer patientId = null;
 
@@ -41,7 +37,7 @@ public class Patient   {
   @JsonProperty("egn")
   private String egn = null;
 
-  public Patient patientId(Integer patientId) {
+  public PatientTO patientId(Integer patientId) {
     this.patientId = patientId;
     return this;
   }
@@ -61,7 +57,7 @@ public class Patient   {
     this.patientId = patientId;
   }
 
-  public Patient firstName(String firstName) {
+  public PatientTO firstName(String firstName) {
     this.firstName = firstName;
     return this;
   }
@@ -81,7 +77,7 @@ public class Patient   {
     this.firstName = firstName;
   }
 
-  public Patient lastName(String lastName) {
+  public PatientTO lastName(String lastName) {
     this.lastName = lastName;
     return this;
   }
@@ -101,7 +97,7 @@ public class Patient   {
     this.lastName = lastName;
   }
 
-  public Patient middleName(String middleName) {
+  public PatientTO middleName(String middleName) {
     this.middleName = middleName;
     return this;
   }
@@ -121,7 +117,7 @@ public class Patient   {
     this.middleName = middleName;
   }
 
-  public Patient email(String email) {
+  public PatientTO email(String email) {
     this.email = email;
     return this;
   }
@@ -141,7 +137,7 @@ public class Patient   {
     this.email = email;
   }
 
-  public Patient telephone(String telephone) {
+  public PatientTO telephone(String telephone) {
     this.telephone = telephone;
     return this;
   }
@@ -161,7 +157,7 @@ public class Patient   {
     this.telephone = telephone;
   }
 
-  public Patient address(String address) {
+  public PatientTO address(String address) {
     this.address = address;
     return this;
   }
@@ -181,7 +177,7 @@ public class Patient   {
     this.address = address;
   }
 
-  public Patient egn(String egn) {
+  public PatientTO egn(String egn) {
     this.egn = egn;
     return this;
   }
@@ -210,15 +206,15 @@ public class Patient   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Patient patient = (Patient) o;
-    return Objects.equals(this.patientId, patient.patientId) &&
-        Objects.equals(this.firstName, patient.firstName) &&
-        Objects.equals(this.lastName, patient.lastName) &&
-        Objects.equals(this.middleName, patient.middleName) &&
-        Objects.equals(this.email, patient.email) &&
-        Objects.equals(this.telephone, patient.telephone) &&
-        Objects.equals(this.address, patient.address) &&
-        Objects.equals(this.egn, patient.egn);
+    PatientTO patientTO = (PatientTO) o;
+    return Objects.equals(this.patientId, patientTO.patientId) &&
+        Objects.equals(this.firstName, patientTO.firstName) &&
+        Objects.equals(this.lastName, patientTO.lastName) &&
+        Objects.equals(this.middleName, patientTO.middleName) &&
+        Objects.equals(this.email, patientTO.email) &&
+        Objects.equals(this.telephone, patientTO.telephone) &&
+        Objects.equals(this.address, patientTO.address) &&
+        Objects.equals(this.egn, patientTO.egn);
   }
 
   @Override
@@ -229,7 +225,7 @@ public class Patient   {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Patient {\n");
+    sb.append("class PatientTO {\n");
     
     sb.append("    patientId: ").append(toIndentedString(patientId)).append("\n");
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");

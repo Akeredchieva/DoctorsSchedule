@@ -1,8 +1,9 @@
 package diplomna.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import diplomna.model.Diseases;
-import diplomna.model.Patient;
+import diplomna.model.DiseasesTO;
+import diplomna.model.PatientTO;
+import diplomna.services.PatientsService;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,28 +30,22 @@ public class PatientsApiController implements PatientsApi {
     private final HttpServletRequest request;
 
     @Autowired
+    PatientsService patientsService;
+
+    @Autowired
     public PatientsApiController(ObjectMapper objectMapper, HttpServletRequest request) {
         this.objectMapper = objectMapper;
         this.request = request;
     }
 
-    public ResponseEntity<Void> addPatients(@ApiParam(value = "Patients object that needs to be added in our application " ,required=true )  @Valid @RequestBody Patient body) {
+    public ResponseEntity<Void> addPatients(@ApiParam(value = "Patients object that needs to be added in our application " ,required=true )  @Valid @RequestBody PatientTO body) {
         String accept = request.getHeader("Accept");
+        //patientsService.createPatients();
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<List<Patient>> patientsGet() {
-        String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/json")) {
-            try {
-                return new ResponseEntity<List<Patient>>(objectMapper.readValue("[ {  \"firstName\" : \"firstName\",  \"lastName\" : \"lastName\",  \"address\" : \"address\",  \"patient_id\" : 0,  \"middleName\" : \"middleName\",  \"telephone\" : \"telephone\",  \"egn\" : \"egn\",  \"email\" : \"email\"}, {  \"firstName\" : \"firstName\",  \"lastName\" : \"lastName\",  \"address\" : \"address\",  \"patient_id\" : 0,  \"middleName\" : \"middleName\",  \"telephone\" : \"telephone\",  \"egn\" : \"egn\",  \"email\" : \"email\"} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<List<Patient>>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-        }
-
-        return new ResponseEntity<List<Patient>>(HttpStatus.NOT_IMPLEMENTED);
+    public ResponseEntity<List<PatientTO>> patientsGet() {
+        return new ResponseEntity<List<PatientTO>>(patientsService.findAllPatients(),HttpStatus.OK);
     }
 
     public ResponseEntity<Void> patientsPatientIdDelete(@ApiParam(value = "",required=true) @PathVariable("patientId") Long patientId) {
@@ -63,45 +58,40 @@ public class PatientsApiController implements PatientsApi {
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Void> patientsPatientIdDiseasesDiseasedIdPut(@ApiParam(value = "Disease object that needs to be added in our application " ,required=true )  @Valid @RequestBody Diseases body,@ApiParam(value = "",required=true) @PathVariable("patientId") Long patientId,@ApiParam(value = "",required=true) @PathVariable("diseasedId") Long diseasedId) {
+    public ResponseEntity<Void> patientsPatientIdDiseasesDiseasedIdPut(@ApiParam(value = "Disease object that needs to be added in our application " ,required=true )  @Valid @RequestBody DiseasesTO body, @ApiParam(value = "",required=true) @PathVariable("patientId") Long patientId, @ApiParam(value = "",required=true) @PathVariable("diseasedId") Long diseasedId) {
         String accept = request.getHeader("Accept");
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<List<Diseases>> patientsPatientIdDiseasesGet(@ApiParam(value = "",required=true) @PathVariable("patientId") Long patientId) {
+    public ResponseEntity<List<DiseasesTO>> patientsPatientIdDiseasesGet(@ApiParam(value = "",required=true) @PathVariable("patientId") Long patientId) {
         String accept = request.getHeader("Accept");
         if (accept != null && accept.contains("application/json")) {
             try {
-                return new ResponseEntity<List<Diseases>>(objectMapper.readValue("[ {  \"dateOfDiagnose\" : \"dateOfDiagnose\",  \"name\" : \"name\",  \"description\" : \"description\"}, {  \"dateOfDiagnose\" : \"dateOfDiagnose\",  \"name\" : \"name\",  \"description\" : \"description\"} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
+                return new ResponseEntity<List<DiseasesTO>>(objectMapper.readValue("[ {  \"dateOfDiagnose\" : \"dateOfDiagnose\",  \"name\" : \"name\",  \"description\" : \"description\"}, {  \"dateOfDiagnose\" : \"dateOfDiagnose\",  \"name\" : \"name\",  \"description\" : \"description\"} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
             } catch (IOException e) {
                 log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<List<Diseases>>(HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<List<DiseasesTO>>(HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
 
-        return new ResponseEntity<List<Diseases>>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<List<DiseasesTO>>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Void> patientsPatientIdDiseasesPost(@ApiParam(value = "Disease object that needs to be added in our application " ,required=true )  @Valid @RequestBody Diseases body,@ApiParam(value = "",required=true) @PathVariable("patientId") Long patientId) {
+    public ResponseEntity<Void> patientsPatientIdDiseasesPost(@ApiParam(value = "Disease object that needs to be added in our application " ,required=true )  @Valid @RequestBody DiseasesTO body, @ApiParam(value = "",required=true) @PathVariable("patientId") Long patientId) {
         String accept = request.getHeader("Accept");
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    public ResponseEntity<Patient> patientsPatientIdGet(@ApiParam(value = "",required=true) @PathVariable("patientId") Long patientId) {
+    public ResponseEntity<PatientTO> patientsPatientIdGet(@ApiParam(value = "",required=true) @PathVariable("patientId") Long patientId) {
         String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/json")) {
-            try {
-                return new ResponseEntity<Patient>(objectMapper.readValue("{  \"firstName\" : \"firstName\",  \"lastName\" : \"lastName\",  \"address\" : \"address\",  \"patient_id\" : 0,  \"middleName\" : \"middleName\",  \"telephone\" : \"telephone\",  \"egn\" : \"egn\",  \"email\" : \"email\"}", Patient.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<Patient>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+        if (accept != null && accept.contains("application/xhtml")) {
+           // patientsService.findOnPatient()
         }
 
-        return new ResponseEntity<Patient>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<PatientTO>(HttpStatus.BAD_REQUEST);
     }
 
-    public ResponseEntity<Void> patientsPatientIdPut(@ApiParam(value = "Patients object that needs to be added in our application " ,required=true )  @Valid @RequestBody Patient body,@ApiParam(value = "",required=true) @PathVariable("patientId") Long patientId) {
+    public ResponseEntity<Void> patientsPatientIdPut(@ApiParam(value = "Patients object that needs to be added in our application " ,required=true )  @Valid @RequestBody PatientTO body, @ApiParam(value = "",required=true) @PathVariable("patientId") Long patientId) {
         String accept = request.getHeader("Accept");
         return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
     }

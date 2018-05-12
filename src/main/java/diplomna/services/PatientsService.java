@@ -1,9 +1,9 @@
 package diplomna.services;
 
+
 import diplomna.entities.Patients;
-import diplomna.model.Patient;
+import diplomna.model.PatientTO;
 import diplomna.repositories.PatientRepository;
-import diplomna.to.PatientTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -27,34 +27,40 @@ public class PatientsService {
     }
 
     // TODO: return PatientTo with ID
-    public void createPatients(Patient patient){
-        String firstName =  patient.getFirstName();
-        String middleName = patient.getMiddleName();
-        String lastName = patient.getLastName();
-        String address  = patient.getAddress();
-        String email = patient.getEmail();
+    public void createPatients(PatientTO patientTO){
+        String firstName =  patientTO.getFirstName();
+        String middleName = patientTO.getMiddleName();
+        String lastName = patientTO.getLastName();
+        String address  = patientTO.getAddress();
+        String email = patientTO.getEmail();
 
-        Patients patients = new Patients(firstName,middleName,lastName, patient.getEgn(),address, email,
+        Patients patients = new Patients(firstName,middleName,lastName, patientTO.getEgn(),address, email,
                 Collections.emptyList());
         patientRepository.save(patients);
     }
 
-    public List<diplomna.model.Patient> findAllPatients(){
-        List<diplomna.model.Patient> patientTOS = new ArrayList<>();
+    public List<PatientTO> findAllPatients(){
+        List<PatientTO> patientTOTOS = new ArrayList<>();
         patientRepository.findAll().forEach(patients -> {
-           patientTOS.add(new diplomna.model.Patient(patients.getId(),patients.getFirstName(),patients.getLastName(),
+           patientTOTOS.add(new PatientTO(patients.getId(),patients.getFirstName(),patients.getLastName(),
                    patients.getMiddleName(),patients.getEmail(),patients.getPhone(), patients.getAddress(),patients.getEgn() ));
         });
-        return  patientTOS;
+        return patientTOTOS;
     }
 
     @Transactional(propagation= Propagation.REQUIRES_NEW)
-    public PatientTO updatePatients(PatientTO patientTO, Integer id){
+    public diplomna.to.PatientTO updatePatients(diplomna.to.PatientTO patientTOTO, Integer id){
         Patients patients = patientRepository.findOne(id);
         //TODO: update all fields
-        patients.setFirstName(patientTO.getFirstName());
+        patients.setFirstName(patientTOTO.getFirstName());
         Patients patientsUpdate = patientRepository.save(patients);
         //TODO: transform patientsUpdate entity to TO
-        return patientTO;
+        return patientTOTO;
+    }
+
+    public PatientTO findOnPatient(Integer id){
+        Patients patients = patientRepository.findOne(id);
+        return (new PatientTO(patients.getId(),patients.getFirstName(),patients.getLastName(),patients.getMiddleName(),patients.getEmail(),patients.getPhone(),patients.getAddress(),patients.getEgn()));
+
     }
 }
