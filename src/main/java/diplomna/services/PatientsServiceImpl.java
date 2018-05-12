@@ -17,16 +17,17 @@ import java.util.List;
  * Created by akere on 08/12/2017.
  */
 @Service
-public class PatientsService {
+public class PatientsServiceImpl implements PatientService {
 
     private final PatientRepository patientRepository;
 
     @Autowired
-    public PatientsService(PatientRepository patientRepository) {
+    public PatientsServiceImpl(PatientRepository patientRepository) {
         this.patientRepository = patientRepository;
     }
 
     // TODO: return PatientTo with ID
+    @Override
     public void createPatients(PatientTO patientTO){
         String firstName =  patientTO.getFirstName();
         String middleName = patientTO.getMiddleName();
@@ -39,6 +40,7 @@ public class PatientsService {
         patientRepository.save(patients);
     }
 
+    @Override
     public List<PatientTO> findAllPatients(){
         List<PatientTO> patientTOTOS = new ArrayList<>();
         patientRepository.findAll().forEach(patients -> {
@@ -48,16 +50,18 @@ public class PatientsService {
         return patientTOTOS;
     }
 
+    @Override
     @Transactional(propagation= Propagation.REQUIRES_NEW)
-    public diplomna.to.PatientTO updatePatients(diplomna.to.PatientTO patientTOTO, Integer id){
+    public PatientTO updatePatients(PatientTO patientTO, Integer id){
         Patients patients = patientRepository.findOne(id);
         //TODO: update all fields
-        patients.setFirstName(patientTOTO.getFirstName());
+        patients.setFirstName(patientTO.getFirstName());
         Patients patientsUpdate = patientRepository.save(patients);
         //TODO: transform patientsUpdate entity to TO
-        return patientTOTO;
+        return patientTO;
     }
 
+    @Override
     public PatientTO findOnPatient(Integer id){
         Patients patients = patientRepository.findOne(id);
         return (new PatientTO(patients.getId(),patients.getFirstName(),patients.getLastName(),patients.getMiddleName(),patients.getEmail(),patients.getPhone(),patients.getAddress(),patients.getEgn()));

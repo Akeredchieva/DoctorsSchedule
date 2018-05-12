@@ -3,7 +3,8 @@ package diplomna.api;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import diplomna.model.DiseasesTO;
 import diplomna.model.PatientTO;
-import diplomna.services.PatientsService;
+import diplomna.services.PatientService;
+import diplomna.services.PatientsServiceImpl;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +31,7 @@ public class PatientsApiController implements PatientsApi {
     private final HttpServletRequest request;
 
     @Autowired
-    PatientsService patientsService;
+    PatientService patientsService;
 
     @Autowired
     public PatientsApiController(ObjectMapper objectMapper, HttpServletRequest request) {
