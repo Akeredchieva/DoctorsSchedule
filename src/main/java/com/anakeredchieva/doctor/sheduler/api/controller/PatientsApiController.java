@@ -88,8 +88,8 @@ public class PatientsApiController implements PatientsApi {
     }
 
     public ResponseEntity<Void> patientsPatientIdPut(@ApiParam(value = "Patients object that needs to be added in our application " ,required=true )  @Valid @RequestBody PatientTO body, @ApiParam(value = "",required=true) @PathVariable("patientId") Integer patientId) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+        PatientTO patientTO = patientsService.updatePatients(body,patientId);
+        return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
 }

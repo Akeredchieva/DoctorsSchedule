@@ -52,9 +52,16 @@ public class PatientsServiceImpl implements PatientService {
         patients.setFirstName(patientTO.getFirstName());
         patients.setLastName(patientTO.getLastName());
         patients.setMiddleName(patientTO.getMiddleName());
+        patients.setAddress(patientTO.getAddress());
+        patients.setEgn(patientTO.getEgn());
+        patients.setEmail(patientTO.getEmail());
+        patients.setPhone(patientTO.getTelephone());
+        //        patients.builder().firstName(patientTO.getFirstName())
+//                .middleName(patientTO.getMiddleName())
+
         Patients patientsUpdate = patientRepository.save(patients);
         //TODO: transform patientsUpdate entity to TO
-        patientTO = PatientConverter.F.toTransfer(patients);
+        patientTO = PatientConverter.F.toTransfer(patientsUpdate);
         return patientTO;
     }
 
@@ -68,4 +75,5 @@ public class PatientsServiceImpl implements PatientService {
     public void deletePatient(Integer id){
         patientRepository.delete(id);
     }
+
 }
