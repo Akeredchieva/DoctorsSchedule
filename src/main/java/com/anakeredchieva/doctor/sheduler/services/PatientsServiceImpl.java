@@ -64,4 +64,8 @@ public class PatientsServiceImpl implements PatientService {
         return (PatientConverter.F.toTransfer(patients));
 
     }
+
+    public void deletePatient(Integer id){
+        patientRepository.delete(id);
+    }
 }

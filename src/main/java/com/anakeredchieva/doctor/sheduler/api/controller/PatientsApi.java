@@ -48,7 +48,7 @@ public interface PatientsApi {
     @RequestMapping(value = "/patients/{patientId}",
         produces = { "application/json" }, 
         method = RequestMethod.DELETE)
-    ResponseEntity<Void> patientsPatientIdDelete(@ApiParam(value = "",required=true) @PathVariable("patientId") Long patientId);
+    ResponseEntity<Void> patientsPatientIdDelete(@ApiParam(value = "",required=true) @PathVariable("patientId") Integer patientId);
 
 
     @ApiOperation(value = "Delete the current disease", nickname = "patientsPatientIdDiseasesDiseasedIdDelete", notes = "With this methow we will be able to delete a current disease for pattient", tags={ "Patients", })
@@ -58,7 +58,7 @@ public interface PatientsApi {
     @RequestMapping(value = "/patients/{patientId}/diseases/{diseasedId}",
         produces = { "application/json" }, 
         method = RequestMethod.DELETE)
-    ResponseEntity<Void> patientsPatientIdDiseasesDiseasedIdDelete(@ApiParam(value = "",required=true) @PathVariable("patientId") Long patientId,@ApiParam(value = "",required=true) @PathVariable("diseasedId") Long diseasedId);
+    ResponseEntity<Void> patientsPatientIdDiseasesDiseasedIdDelete(@ApiParam(value = "",required=true) @PathVariable("patientId") Integer patientId,@ApiParam(value = "",required=true) @PathVariable("diseasedId") Integer diseasedId);
 
 
     @ApiOperation(value = "Create a new disease", nickname = "patientsPatientIdDiseasesDiseasedIdPut", notes = "With this method we want to create a new disease for specific patient in our application", tags={ "Patients", })
@@ -68,7 +68,7 @@ public interface PatientsApi {
         produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.PUT)
-    ResponseEntity<Void> patientsPatientIdDiseasesDiseasedIdPut(@ApiParam(value = "Disease object that needs to be added in our application " ,required=true )  @Valid @RequestBody DiseasesTO body, @ApiParam(value = "",required=true) @PathVariable("patientId") Long patientId, @ApiParam(value = "",required=true) @PathVariable("diseasedId") Long diseasedId);
+    ResponseEntity<Void> patientsPatientIdDiseasesDiseasedIdPut(@ApiParam(value = "Disease object that needs to be added in our application " ,required=true )  @Valid @RequestBody DiseasesTO body, @ApiParam(value = "",required=true) @PathVariable("patientId") Integer patientId, @ApiParam(value = "",required=true) @PathVariable("diseasedId") Integer diseasedId);
 
 
     @ApiOperation(value = "", nickname = "patientsPatientIdDiseasesGet", notes = "", response = DiseasesTO.class, responseContainer = "List", tags={ "Patients", })
@@ -78,7 +78,7 @@ public interface PatientsApi {
     @RequestMapping(value = "/patients/{patientId}/diseases",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
-    ResponseEntity<List<DiseasesTO>> patientsPatientIdDiseasesGet(@ApiParam(value = "",required=true) @PathVariable("patientId") Long patientId);
+    ResponseEntity<List<DiseasesTO>> patientsPatientIdDiseasesGet(@ApiParam(value = "",required=true) @PathVariable("patientId") Integer patientId);
 
 
     @ApiOperation(value = "Create a new disease", nickname = "patientsPatientIdDiseasesPost", notes = "With this method we want to create a new disease for specific patient in our application", tags={ "Patients", })
@@ -88,7 +88,7 @@ public interface PatientsApi {
         produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.POST)
-    ResponseEntity<Void> patientsPatientIdDiseasesPost(@ApiParam(value = "Disease object that needs to be added in our application " ,required=true )  @Valid @RequestBody DiseasesTO body, @ApiParam(value = "",required=true) @PathVariable("patientId") Long patientId);
+    ResponseEntity<Void> patientsPatientIdDiseasesPost(@ApiParam(value = "Disease object that needs to be added in our application " ,required=true )  @Valid @RequestBody DiseasesTO body, @ApiParam(value = "",required=true) @PathVariable("patientId") Integer patientId);
 
 
     @ApiOperation(value = "", nickname = "patientsPatientIdGet", notes = "", response = PatientTO.class, tags={ "Patients", })
@@ -108,6 +108,6 @@ public interface PatientsApi {
         produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.PUT)
-    ResponseEntity<Void> patientsPatientIdPut(@ApiParam(value = "Patients object that needs to be added in our application " ,required=true )  @Valid @RequestBody PatientTO body, @ApiParam(value = "",required=true) @PathVariable("patientId") Long patientId);
+    ResponseEntity<Void> patientsPatientIdPut(@ApiParam(value = "Patients object that needs to be added in our application " ,required=true )  @Valid @RequestBody PatientTO body, @ApiParam(value = "",required=true) @PathVariable("patientId") Integer patientId);
 
 }

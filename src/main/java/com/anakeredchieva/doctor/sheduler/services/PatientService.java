@@ -20,4 +20,6 @@ public interface PatientService {
     PatientTO updatePatients(PatientTO patientTO, Integer id);
 
     PatientTO findOnPatient(Integer id);
+
+    void deletePatient(Integer id);
 }
