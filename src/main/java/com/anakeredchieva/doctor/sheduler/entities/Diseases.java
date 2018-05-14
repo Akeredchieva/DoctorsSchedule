@@ -1,10 +1,13 @@
 package com.anakeredchieva.doctor.sheduler.entities;
 
+import lombok.Builder;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "diseases")
+@Builder
 public class Diseases implements Serializable {
 
     @Id

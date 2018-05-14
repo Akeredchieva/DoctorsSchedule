@@ -3,6 +3,7 @@ package com.anakeredchieva.doctor.sheduler.model;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Builder;
 import org.springframework.validation.annotation.Validated;
 
 /**
@@ -10,7 +11,7 @@ import org.springframework.validation.annotation.Validated;
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-05-06T12:51:14.120Z")
-
+@Builder
 public class DiseasesTO {
   @JsonProperty("name")
   private String name = null;

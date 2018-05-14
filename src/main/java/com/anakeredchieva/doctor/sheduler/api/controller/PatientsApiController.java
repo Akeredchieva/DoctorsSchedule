@@ -1,5 +1,7 @@
 package com.anakeredchieva.doctor.sheduler.api.controller;
 
+import com.anakeredchieva.doctor.sheduler.entities.PatientsDiseases;
+import com.anakeredchieva.doctor.sheduler.services.DiseaseService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.anakeredchieva.doctor.sheduler.model.DiseasesTO;
 import com.anakeredchieva.doctor.sheduler.model.PatientTO;
@@ -31,6 +33,9 @@ public class PatientsApiController implements PatientsApi {
 
     @Autowired
     PatientService patientsService;
+
+    @Autowired
+    DiseaseService diseaseService;
 
     @Autowired
     public PatientsApiController(ObjectMapper objectMapper, HttpServletRequest request) {
@@ -76,9 +81,11 @@ public class PatientsApiController implements PatientsApi {
         return new ResponseEntity<List<DiseasesTO>>(HttpStatus.NOT_IMPLEMENTED);
     }
 
+    //TODO: Това трябва да е коректно
     public ResponseEntity<Void> patientsPatientIdDiseasesPost(@ApiParam(value = "Disease object that needs to be added in our application " ,required=true )  @Valid @RequestBody DiseasesTO body, @ApiParam(value = "",required=true) @PathVariable("patientId") Integer patientId) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+        PatientTO patientTO = patientsService.findOnPatient(patientId);
+        diseaseService.createDisease(body,patientTO);
+        return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
     public ResponseEntity<PatientTO> patientsPatientIdGet(@ApiParam(value = "",required=true) @PathVariable("patientId") Integer patientId) {
