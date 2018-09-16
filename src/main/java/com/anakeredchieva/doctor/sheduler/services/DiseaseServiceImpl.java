@@ -59,4 +59,12 @@ public class DiseaseServiceImpl implements DiseaseService {
     public List<DiseasesTO> findAllDiseases() {
         return diseaseRepository.findAll().stream().map(DiseaseConverter.F::toTransfer).collect(Collectors.toList());
     }
+
+    @Override
+    public void updateDisease(DiseasesTO diseasesTO, Integer diseaseId) {
+        Diseases disease = diseaseRepository.findOne(diseaseId);
+        disease.setDiseaseName(diseasesTO.getName());
+        disease.setDescription(diseasesTO.getDescription());
+        diseaseRepository.save(disease);
+    }
 }

@@ -11,5 +11,6 @@ import java.util.List;
 public interface DiseaseService {
     void createDisease(DiseasesTO diseasesTO, Integer patientId);
     List<DiseasesTO> findAllDiseases();
+    void updateDisease(DiseasesTO diseasesTO, Integer diseaseId);
 
 }
