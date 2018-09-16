@@ -91,8 +91,5 @@ public class PatientsApiController implements PatientsApi {
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
-    public ResponseEntity<List<DiseasesTO>> diseasesGet() {
-        return new ResponseEntity<List<DiseasesTO>>(diseaseService.findAllDiseases(), HttpStatus.OK);
-    }
 
 }
