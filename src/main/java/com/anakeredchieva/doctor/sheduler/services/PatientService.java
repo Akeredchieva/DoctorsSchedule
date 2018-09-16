@@ -1,5 +1,6 @@
 package com.anakeredchieva.doctor.sheduler.services;
 
+import com.anakeredchieva.doctor.sheduler.model.DiseasesTO;
 import com.anakeredchieva.doctor.sheduler.model.PatientTO;
 
 import java.util.List;
@@ -22,4 +23,6 @@ public interface PatientService {
     PatientTO findOnPatient(Integer id);
 
     void deletePatient(Integer id);
+
+    List<DiseasesTO> findDiseaseByPatientId(Integer patientId);
 }

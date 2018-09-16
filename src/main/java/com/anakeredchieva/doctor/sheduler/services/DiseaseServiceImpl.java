@@ -10,6 +10,10 @@ import com.anakeredchieva.doctor.sheduler.repositories.PatientDiseasesRepository
 import com.anakeredchieva.doctor.sheduler.repositories.PatientRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * Created by akere on 05/14/2018.
  */
@@ -49,5 +53,10 @@ public class DiseaseServiceImpl implements DiseaseService {
 //        patientsDiseases.setDiagnoseDate();
       //  patientsDiseases.setDisease(diseases);
 
+    }
+
+    @Override
+    public List<DiseasesTO> findAllDiseases() {
+        return diseaseRepository.findAll().stream().map(DiseaseConverter.F::toTransfer).collect(Collectors.toList());
     }
 }

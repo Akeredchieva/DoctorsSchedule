@@ -110,4 +110,12 @@ public interface PatientsApi {
         method = RequestMethod.PUT)
     ResponseEntity<Void> patientsPatientIdPut(@ApiParam(value = "Patients object that needs to be added in our application " ,required=true )  @Valid @RequestBody PatientTO body, @ApiParam(value = "",required=true) @PathVariable("patientId") Integer patientId);
 
+    @ApiOperation(value = "GET all diseases", nickname = "diseasesGet", notes = "", response = DiseasesTO.class, responseContainer = "List", tags={ "Diseases", })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "An array of diseases", response = DiseasesTO.class, responseContainer = "List"),
+            @ApiResponse(code = 200, message = "Unexpected error", response = Error.class) })
+    @RequestMapping(value = "/diseases",
+            produces = { "application/json" },
+            method = RequestMethod.GET)
+    ResponseEntity<List<DiseasesTO>> diseasesGet();
 }

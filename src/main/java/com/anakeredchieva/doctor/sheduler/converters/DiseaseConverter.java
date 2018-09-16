@@ -21,6 +21,6 @@ public enum DiseaseConverter implements Converter <Diseases, DiseasesTO> {
 
     @Override
     public DiseasesTO toTransfer(Diseases diseases) {
-        return new DiseasesTO().name(diseases.getDiseaseName());
+        return new DiseasesTO().name(diseases.getDiseaseName()).description(diseases.getDescription());
     }
 }

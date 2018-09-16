@@ -69,19 +69,11 @@ public class PatientsApiController implements PatientsApi {
 
     public ResponseEntity<List<DiseasesTO>> patientsPatientIdDiseasesGet(@ApiParam(value = "", required = true) @PathVariable("patientId") Integer patientId) {
         String accept = request.getHeader("Accept");
-        if (accept != null && accept.contains("application/json")) {
-            try {
-                return new ResponseEntity<List<DiseasesTO>>(objectMapper.readValue("[ {  \"dateOfDiagnose\" : \"dateOfDiagnose\",  \"name\" : \"name\",  \"description\" : \"description\"}, {  \"dateOfDiagnose\" : \"dateOfDiagnose\",  \"name\" : \"name\",  \"description\" : \"description\"} ]", List.class), HttpStatus.NOT_IMPLEMENTED);
-            } catch (IOException e) {
-                log.error("Couldn't serialize response for content type application/json", e);
-                return new ResponseEntity<List<DiseasesTO>>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-        }
-
-        return new ResponseEntity<List<DiseasesTO>>(HttpStatus.NOT_IMPLEMENTED);
+        List<DiseasesTO> patientDiseases = patientsService.findDiseaseByPatientId(patientId);
+        return new ResponseEntity<List<DiseasesTO>>(patientDiseases,HttpStatus.OK);
     }
 
-    //TODO: Това трябва да е коректно
+
     public ResponseEntity<Void> patientsPatientIdDiseasesPost(@ApiParam(value = "Disease object that needs to be added in our application ", required = true) @Valid @RequestBody DiseasesTO body, @ApiParam(value = "", required = true) @PathVariable("patientId") Integer patientId) {
 
         diseaseService.createDisease(body, patientId);
@@ -97,6 +89,10 @@ public class PatientsApiController implements PatientsApi {
     public ResponseEntity<Void> patientsPatientIdPut(@ApiParam(value = "Patients object that needs to be added in our application ", required = true) @Valid @RequestBody PatientTO body, @ApiParam(value = "", required = true) @PathVariable("patientId") Integer patientId) {
         PatientTO patientTO = patientsService.updatePatients(body, patientId);
         return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+
+    public ResponseEntity<List<DiseasesTO>> diseasesGet() {
+        return new ResponseEntity<List<DiseasesTO>>(diseaseService.findAllDiseases(), HttpStatus.OK);
     }
 
 }

@@ -1,9 +1,14 @@
 package com.anakeredchieva.doctor.sheduler.services;
 
 
+import com.anakeredchieva.doctor.sheduler.converters.DiseaseConverter;
 import com.anakeredchieva.doctor.sheduler.converters.PatientConverter;
+import com.anakeredchieva.doctor.sheduler.entities.Diseases;
 import com.anakeredchieva.doctor.sheduler.entities.Patients;
+import com.anakeredchieva.doctor.sheduler.entities.PatientsDiseases;
+import com.anakeredchieva.doctor.sheduler.model.DiseasesTO;
 import com.anakeredchieva.doctor.sheduler.model.PatientTO;
+import com.anakeredchieva.doctor.sheduler.repositories.PatientDiseasesRepository;
 import com.anakeredchieva.doctor.sheduler.repositories.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by akere on 08/12/2017.
@@ -20,10 +26,12 @@ import java.util.List;
 public class PatientsServiceImpl implements PatientService {
 
     private final PatientRepository patientRepository;
+    private final PatientDiseasesRepository patientDiseasesRepository;
 
     @Autowired
-    public PatientsServiceImpl(PatientRepository patientRepository) {
+    public PatientsServiceImpl(PatientRepository patientRepository, PatientDiseasesRepository patientDiseasesRepository) {
         this.patientRepository = patientRepository;
+        this.patientDiseasesRepository = patientDiseasesRepository;
     }
 
     // TODO: return PatientTo with ID
@@ -74,6 +82,16 @@ public class PatientsServiceImpl implements PatientService {
 
     public void deletePatient(Integer id){
         patientRepository.delete(id);
+    }
+
+    @Override
+    public List<DiseasesTO> findDiseaseByPatientId(Integer patientId) {
+        return  patientDiseasesRepository.getAllDiseasesByPatientId(patientId)
+                    .stream().map(x -> {
+                        DiseasesTO diseasesTO = DiseaseConverter.F.toTransfer(x.getDisease());
+                        return diseasesTO.dateOfDiagnose(x.getDiagnoseDate()).description(x.getDescription());
+                    })
+                    .collect(Collectors.toList());
     }
 
 }
