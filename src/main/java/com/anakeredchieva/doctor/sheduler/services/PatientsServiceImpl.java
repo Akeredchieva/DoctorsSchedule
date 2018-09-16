@@ -94,4 +94,10 @@ public class PatientsServiceImpl implements PatientService {
                     .collect(Collectors.toList());
     }
 
+    @Override
+    public void deletePatientDisease(Integer patientId, Integer diseaseId) {
+       PatientsDiseases patientsDiseases = patientDiseasesRepository.findByPatientIdAndDiseaseId(patientId,diseaseId);
+       patientDiseasesRepository.delete(patientsDiseases);
+    }
+
 }

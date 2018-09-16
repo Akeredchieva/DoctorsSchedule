@@ -25,4 +25,6 @@ public interface PatientService {
     void deletePatient(Integer id);
 
     List<DiseasesTO> findDiseaseByPatientId(Integer patientId);
+
+    void deletePatientDisease(Integer patientId, Integer diseaseId);
 }
