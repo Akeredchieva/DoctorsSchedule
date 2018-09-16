@@ -83,8 +83,8 @@ public class PatientsApiController implements PatientsApi {
 
     //TODO: Това трябва да е коректно
     public ResponseEntity<Void> patientsPatientIdDiseasesPost(@ApiParam(value = "Disease object that needs to be added in our application ", required = true) @Valid @RequestBody DiseasesTO body, @ApiParam(value = "", required = true) @PathVariable("patientId") Integer patientId) {
-        PatientTO patientTO = patientsService.findOnPatient(patientId);
-        diseaseService.createDisease(body, patientTO);
+
+        diseaseService.createDisease(body, patientId);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 

@@ -1,24 +1,26 @@
 package com.anakeredchieva.doctor.sheduler.entities;
 
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "patients_diseases")
+@Builder
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
 @Data
 public class PatientsDiseases implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
     @ManyToOne
     @JoinColumn(name = "patient_id")
     private Patients patient;
 
-    @Id
     @ManyToOne
     @JoinColumn(name = "disease_id")
     private Diseases disease;
@@ -32,47 +34,4 @@ public class PatientsDiseases implements Serializable {
     @Column(name = "description")
     private String description;
 
-    public PatientsDiseases(Patients patient, Diseases disease, String diagnoseDate) {
-        this.setPatient(patient);
-        this.setDisease(disease);
-        this.setDiagnoseDate(diagnoseDate);
-    }
-
-    public PatientsDiseases(Patients patient, Diseases disease,String diagnoseDate, String description) {
-        this.setPatient(patient);
-        this.setDisease(disease);
-        this.setDescription(description);
-        this.setDiagnoseDate(diagnoseDate);
-    }
-    public Patients getPatient() {
-        return patient;
-    }
-
-    public void setPatient(Patients patient) {
-        this.patient = patient;
-    }
-
-    public Diseases getDisease() {
-        return disease;
-    }
-
-    public void setDisease(Diseases disease) {
-        this.disease = disease;
-    }
-
-    public String getDiagnoseDate() {
-        return diagnoseDate;
-    }
-
-    public void setDiagnoseDate(String diagnoseDate) {
-        this.diagnoseDate = diagnoseDate;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }

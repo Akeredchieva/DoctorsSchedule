@@ -7,4 +7,5 @@ import org.springframework.data.repository.CrudRepository;
  * Created by akere on 05/14/2018.
  */
 public interface DiseaseRepository extends CrudRepository<Diseases, Integer > {
+    Diseases findByDiseaseName(String diseaseName);
 }
