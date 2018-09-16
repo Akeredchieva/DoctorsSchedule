@@ -1,12 +1,16 @@
 package com.anakeredchieva.doctor.sheduler.entities;
 
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.Date;
 
 
 @Entity
 @Table(name = "patients_times")
+@NoArgsConstructor(access = AccessLevel.PACKAGE)
 public class Time {
 
     @Id

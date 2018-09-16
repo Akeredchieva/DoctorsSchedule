@@ -16,20 +16,19 @@ import org.springframework.stereotype.Service;
 public class DiseaseServiceImpl implements DiseaseService {
 
    private final DiseaseRepository diseaseRepository;
-   private final PatientsDiseases patientsDiseases;
 
-    public DiseaseServiceImpl(DiseaseRepository diseaseRepository, PatientsDiseases patientsDiseases) {
+    public DiseaseServiceImpl(DiseaseRepository diseaseRepository) {
         this.diseaseRepository = diseaseRepository;
-        this.patientsDiseases = patientsDiseases;
+
     }
 
     // TODO: за да създам самата болест трябва ТО-то да го преобразувам в болест. Тук би трябвало да има създаване на две entity-та - едно за самата болест и едно за връската пациент-болест нали?
     public void createDisease(DiseasesTO diseasesTO, PatientTO patientTO){
         Diseases diseases = DiseaseConverter.F.toEntity(diseasesTO);
-        patientsDiseases.setPatient(PatientConverter.F.toEntity(patientTO));
-        patientsDiseases.setDescription();
-        patientsDiseases.setDiagnoseDate();
-        patientsDiseases.setDisease(diseases);
+     //   patientsDiseases.setPatient(PatientConverter.F.toEntity(patientTO));
+//        patientsDiseases.setDescription();
+//        patientsDiseases.setDiagnoseDate();
+      //  patientsDiseases.setDisease(diseases);
 
     }
 }

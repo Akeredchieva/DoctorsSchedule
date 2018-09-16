@@ -20,11 +20,7 @@ public enum DiseaseConverter implements Converter <Diseases, DiseasesTO> {
     }
 
     @Override
-    //TODO: не съм сигурна как трябва да се създадат без връзката
-    public DiseasesTO toTransfer(Diseases diseases, PatientsDiseases patientsDiseases) {
-        return DiseasesTO.builder().name(diseases.getDiseaseName())
-                .description(patientsDiseases.getDescription())
-                .dateOfDiagnose(patientsDiseases.getDiagnoseDate())
-                .build();
+    public DiseasesTO toTransfer(Diseases diseases) {
+        return new DiseasesTO().name(diseases.getDiseaseName());
     }
 }

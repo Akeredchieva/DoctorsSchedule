@@ -1,10 +1,16 @@
 package com.anakeredchieva.doctor.sheduler.entities;
 
+import lombok.AccessLevel;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "patients_diseases")
+@NoArgsConstructor(access = AccessLevel.PACKAGE)
+@Data
 public class PatientsDiseases implements Serializable {
 
     @Id
