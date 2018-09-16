@@ -100,4 +100,10 @@ public class PatientsServiceImpl implements PatientService {
        patientDiseasesRepository.delete(patientsDiseases);
     }
 
+    @Override
+    public void updatePatientDisease(Integer patientId, Integer diseaseId) {
+        PatientsDiseases patientsDiseases = patientDiseasesRepository.findByPatientIdAndDiseaseId(patientId,diseaseId);
+
+    }
+
 }

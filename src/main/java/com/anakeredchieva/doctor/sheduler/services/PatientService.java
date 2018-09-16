@@ -1,5 +1,6 @@
 package com.anakeredchieva.doctor.sheduler.services;
 
+import com.anakeredchieva.doctor.sheduler.entities.PatientsDiseases;
 import com.anakeredchieva.doctor.sheduler.model.DiseasesTO;
 import com.anakeredchieva.doctor.sheduler.model.PatientTO;
 
@@ -27,4 +28,6 @@ public interface PatientService {
     List<DiseasesTO> findDiseaseByPatientId(Integer patientId);
 
     void deletePatientDisease(Integer patientId, Integer diseaseId);
+
+    void updatePatientDisease(DiseasesTO diseasesTO, Integer patientId, Integer diseaseId);
 }

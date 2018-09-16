@@ -62,9 +62,9 @@ public class PatientsApiController implements PatientsApi {
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
+    //TODO:Dovarshi si update -> trqbva da slojish TO...
     public ResponseEntity<Void> patientsPatientIdDiseasesDiseasedIdPut(@ApiParam(value = "Disease object that needs to be added in our application ", required = true) @Valid @RequestBody DiseasesTO body, @ApiParam(value = "", required = true) @PathVariable("patientId") Integer patientId, @ApiParam(value = "", required = true) @PathVariable("diseasedId") Integer diseasedId) {
-        String accept = request.getHeader("Accept");
-        return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+        patientsService.updatePatientDisease(body,patientId,diseasedId);
     }
 
     public ResponseEntity<List<DiseasesTO>> patientsPatientIdDiseasesGet(@ApiParam(value = "", required = true) @PathVariable("patientId") Integer patientId) {
