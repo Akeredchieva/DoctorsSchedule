@@ -8,6 +8,8 @@ import com.anakeredchieva.doctor.sheduler.model.DiseasesTO;
 import com.anakeredchieva.doctor.sheduler.repositories.DiseaseRepository;
 import com.anakeredchieva.doctor.sheduler.repositories.PatientDiseasesRepository;
 import com.anakeredchieva.doctor.sheduler.repositories.PatientRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -23,6 +25,8 @@ public class DiseaseServiceImpl implements DiseaseService {
    private final DiseaseRepository diseaseRepository;
    private final PatientRepository patientRepository;
    private final PatientDiseasesRepository patientDiseasesRepository;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(DiseaseService.class);
 
     public DiseaseServiceImpl(DiseaseRepository diseaseRepository, PatientRepository patientRepository, PatientDiseasesRepository patientDiseasesRepository) {
         this.diseaseRepository = diseaseRepository;
