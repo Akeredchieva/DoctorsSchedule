@@ -12,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,7 +25,7 @@ public class DiseaseServiceImpl implements DiseaseService {
    private final PatientRepository patientRepository;
    private final PatientDiseasesRepository patientDiseasesRepository;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DiseaseService.class);
+   private static final Logger LOG = LoggerFactory.getLogger(DiseaseService.class);
 
     public DiseaseServiceImpl(DiseaseRepository diseaseRepository, PatientRepository patientRepository, PatientDiseasesRepository patientDiseasesRepository) {
         this.diseaseRepository = diseaseRepository;
@@ -36,7 +35,9 @@ public class DiseaseServiceImpl implements DiseaseService {
     }
 
     // TODO: за да създам самата болест трябва ТО-то да го преобразувам в болест. Тук би трябвало да има създаване на две entity-та - едно за самата болест и едно за връската пациент-болест нали?
+    @Override
     public void createDisease(DiseasesTO diseasesTO, Integer patientId){
+        LOG.info("You start creating patient with name {} ",diseasesTO.getName());
         Diseases diseases = diseaseRepository.findByDiseaseName(diseasesTO.getName());
         if (diseases == null){
 
@@ -52,6 +53,8 @@ public class DiseaseServiceImpl implements DiseaseService {
                 .build();
         patientDiseasesRepository.save(patientsDiseases);
 
+        LOG.info("You've successfully create a patient with name {} ",diseasesTO.getName());
+
      //   patientsDiseases.setPatient(PatientConverter.F.toEntity(patientTO));
 //        patientsDiseases.setDescription();
 //        patientsDiseases.setDiagnoseDate();
@@ -61,14 +64,19 @@ public class DiseaseServiceImpl implements DiseaseService {
 
     @Override
     public List<DiseasesTO> findAllDiseases() {
-        return diseaseRepository.findAll().stream().map(DiseaseConverter.F::toTransfer).collect(Collectors.toList());
+        LOG.info("You start searching for all diseases in the DB");
+        List<DiseasesTO> listOfDiseases = diseaseRepository.findAll().stream().map(DiseaseConverter.F::toTransfer).collect(Collectors.toList());
+        LOG.info("You found {} diseases in the DB",listOfDiseases.size());
+        return listOfDiseases;
     }
 
     @Override
     public void updateDisease(DiseasesTO diseasesTO, Integer diseaseId) {
+        LOG.info("You start searching for disease with id {} and will start updating",diseaseId);
         Diseases disease = diseaseRepository.findOne(diseaseId);
         disease.setDiseaseName(diseasesTO.getName());
         disease.setDescription(diseasesTO.getDescription());
         diseaseRepository.save(disease);
+        LOG.info("You successfully updated disease with id {}",diseaseId);
     }
 }

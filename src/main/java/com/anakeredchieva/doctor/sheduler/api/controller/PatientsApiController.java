@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.util.List;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-05-06T12:51:14.120Z")
@@ -65,6 +64,7 @@ public class PatientsApiController implements PatientsApi {
     //TODO:Dovarshi si update -> trqbva da slojish TO...
     public ResponseEntity<Void> patientsPatientIdDiseasesDiseasedIdPut(@ApiParam(value = "Disease object that needs to be added in our application ", required = true) @Valid @RequestBody DiseasesTO body, @ApiParam(value = "", required = true) @PathVariable("patientId") Integer patientId, @ApiParam(value = "", required = true) @PathVariable("diseasedId") Integer diseasedId) {
         patientsService.updatePatientDisease(body,patientId,diseasedId);
+        return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
     public ResponseEntity<List<DiseasesTO>> patientsPatientIdDiseasesGet(@ApiParam(value = "", required = true) @PathVariable("patientId") Integer patientId) {
@@ -81,8 +81,8 @@ public class PatientsApiController implements PatientsApi {
     }
 
     public ResponseEntity<PatientTO> patientsPatientIdGet(@ApiParam(value = "", required = true) @PathVariable("patientId") Integer patientId) {
-        // patientsService.findOnPatient()
-        PatientTO patient = patientsService.findOnPatient(patientId);
+        // patientsService.findPatientById()
+        PatientTO patient = patientsService.findPatientById(patientId);
         return new ResponseEntity<PatientTO>(patient, HttpStatus.BAD_REQUEST);
     }
 
