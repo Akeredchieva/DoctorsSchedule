@@ -124,8 +124,16 @@ public class PatientsServiceImpl implements PatientService {
     @Override
     public void updatePatientDisease(DiseasesTO diseasesTO, Integer patientId, Integer diseaseId) {
         LOG.info("You start updating disease with id {} for patient with {} id ",diseaseId,patientId);
+       PatientsDiseases patientsDiseases = patientDiseasesRepository.findByPatientIdAndDiseaseId(patientId,diseaseId);
+       if(diseasesTO.getDateOfDiagnose() != null){
+           patientsDiseases.setDiagnoseDate(diseasesTO.getDateOfDiagnose());
+       }
+       if(diseasesTO.getDescription() != null){
+            patientsDiseases.setDescription(diseasesTO.getDescription());
+        }
 
-        LOG.info("You successfully update disease with id {} for patient with {} id ",diseaseId,patientId);
+       patientDiseasesRepository.save(patientsDiseases);
+       LOG.info("You successfully update disease with id {} for patient with {} id ",diseaseId,patientId);
 
     }
 

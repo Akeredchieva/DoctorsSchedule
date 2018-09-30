@@ -37,7 +37,7 @@ public class DiseaseServiceImpl implements DiseaseService {
     // TODO: за да създам самата болест трябва ТО-то да го преобразувам в болест. Тук би трябвало да има създаване на две entity-та - едно за самата болест и едно за връската пациент-болест нали?
     @Override
     public void createDisease(DiseasesTO diseasesTO, Integer patientId){
-        LOG.info("You start creating patient with name {} ",diseasesTO.getName());
+        LOG.info("You start creating disease with name {} for patient with id {} ",diseasesTO.getName(),patientId);
         Diseases diseases = diseaseRepository.findByDiseaseName(diseasesTO.getName());
         if (diseases == null){
 
@@ -53,7 +53,7 @@ public class DiseaseServiceImpl implements DiseaseService {
                 .build();
         patientDiseasesRepository.save(patientsDiseases);
 
-        LOG.info("You've successfully create a patient with name {} ",diseasesTO.getName());
+        LOG.info("You've successfully create a disease with name {} for patient with id {} ",diseasesTO.getName(), patientId);
 
      //   patientsDiseases.setPatient(PatientConverter.F.toEntity(patientTO));
 //        patientsDiseases.setDescription();
