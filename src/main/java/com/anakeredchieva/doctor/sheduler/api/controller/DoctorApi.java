@@ -25,7 +25,7 @@ public interface DoctorApi {
             produces = { "application/json" },
             consumes = { "application/json" },
             method = RequestMethod.POST)
-    ResponseEntity<Void> addDoctors(@ApiParam(value = "Doctors object that needs to be added in our application " ,required=true )  @Valid @RequestBody DoctorsTO body);
+    ResponseEntity<Void> addDoctors(@ApiParam(value = "Doctors object that needs to be added in our application " ,required=true )  @Valid @RequestBody DoctorsTO doctorsTO);
 
     @ApiOperation(value = "GET all doctors", nickname = "doctorsGet", notes = "", response = DiseasesTO.class, responseContainer = "List", tags={ "Diseases", })
     @ApiResponses(value = {

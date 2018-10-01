@@ -14,7 +14,6 @@ import javax.validation.constraints.NotNull;
  */
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-05-06T12:51:14.120Z")
-@AllArgsConstructor
 @Builder
 public class PatientTO {
   @JsonProperty("patient_id")

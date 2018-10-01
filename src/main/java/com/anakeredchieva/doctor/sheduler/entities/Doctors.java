@@ -2,6 +2,9 @@ package com.anakeredchieva.doctor.sheduler.entities;
 
 
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -9,6 +12,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "doctors")
+@Builder
+@AllArgsConstructor
 public class Doctors implements Serializable {
 
     @Id
