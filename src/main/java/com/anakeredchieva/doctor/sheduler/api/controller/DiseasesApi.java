@@ -14,7 +14,7 @@ import java.util.List;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-05-06T12:51:14.120Z")
 
-@Api(value = "patients", description = "the patients API")
+@Api(value = "diseases", description = "the diseases API")
 public interface DiseasesApi {
 
     @ApiOperation(value = "GET all diseases", nickname = "diseasesGet", notes = "", response = DiseasesTO.class, responseContainer = "List", tags={ "Diseases", })
