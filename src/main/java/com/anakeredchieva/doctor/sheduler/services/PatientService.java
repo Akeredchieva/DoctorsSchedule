@@ -1,5 +1,6 @@
 package com.anakeredchieva.doctor.sheduler.services;
 
+import com.anakeredchieva.doctor.sheduler.api.NotFoundException;
 import com.anakeredchieva.doctor.sheduler.entities.PatientsDiseases;
 import com.anakeredchieva.doctor.sheduler.model.DiseasesTO;
 import com.anakeredchieva.doctor.sheduler.model.PatientTO;
@@ -17,7 +18,7 @@ public interface PatientService {
      */
     void createPatients(PatientTO patientTO);
 
-    List<PatientTO> findAllPatients();
+    List<PatientTO> findAllPatients() throws NotFoundException;
 
     PatientTO updatePatients(PatientTO patientTO, Integer id);
 

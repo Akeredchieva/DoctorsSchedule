@@ -10,6 +10,8 @@ import com.anakeredchieva.doctor.sheduler.model.DiseasesTO;
 import com.anakeredchieva.doctor.sheduler.model.PatientTO;
 import com.anakeredchieva.doctor.sheduler.repositories.PatientDiseasesRepository;
 import com.anakeredchieva.doctor.sheduler.repositories.PatientRepository;
+import com.anakeredchieva.doctor.sheduler.services.exceptions.AlreadyExistException;
+import com.anakeredchieva.doctor.sheduler.services.exceptions.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,20 +44,28 @@ public class PatientsServiceImpl implements PatientService {
     @Override
     public void createPatients(PatientTO patientTO){
         LOG.info("You start creating patient with name {} {} ",patientTO.getFirstName(), patientTO.getLastName());
+        Patients patientsValidate = patientRepository.findByEgn(patientTO.getEgn());
+        if (patientsValidate != null){
+            throw new AlreadyExistException("This patient already exist in the DB !");
+        }
         Patients patients = PatientConverter.F.toEntity(patientTO);
         Patients patient = patientRepository.save(patients);
         LOG.info("You successfully create patient with name {} {} with id {}",patient.getFirstName(), patient.getLastName(), patient.getId());
     }
 
     @Override
-    public List<PatientTO> findAllPatients(){
+    public List<PatientTO> findAllPatients() {
         LOG.info("You start searching for all patients in the DB");
         List<PatientTO> patientTO = new ArrayList<>();
+
         patientRepository.findAll().forEach(patients -> {
             patientTO.add(PatientConverter.F.toTransfer(patients));
 //            patientTO.add(new PatientTO(patients.getId(),patients.getFirstName(),patients.getLastName(),
 //                   patients.getMiddleName(),patients.getEmail(),patients.getPhone(), patients.getAddress(),patients.getEgn() ));
         });
+        if (patientTO.size() == 0){
+            throw new NotFoundException("There is no patient in the DB!");
+        }
         LOG.info("You found {} number of patients",patientTO.size());
         return patientTO;
     }
@@ -65,6 +75,9 @@ public class PatientsServiceImpl implements PatientService {
     public PatientTO updatePatients(PatientTO patientTO, Integer id){
         LOG.info("You start updating patient with {} id",id);
         Patients patients = patientRepository.findOne(id);
+        if (patients == null){
+            throw new NotFoundException("There is no patient with this id in the DB!");
+        }
         //TODO: update all fields
         patients.setFirstName(patientTO.getFirstName());
         patients.setLastName(patientTO.getLastName());
@@ -88,6 +101,9 @@ public class PatientsServiceImpl implements PatientService {
     public PatientTO findPatientById(Integer id){
         LOG.info("You start searching for patient with {} id ",id);
         Patients patients = patientRepository.findOne(id);
+        if (patients == null){
+            throw new NotFoundException("There is no patient with this id in the DB!");
+        }
         LOG.info("You found patient with id {} ",id);
         return (PatientConverter.F.toTransfer(patients));
 
@@ -95,12 +111,20 @@ public class PatientsServiceImpl implements PatientService {
 
     public void deletePatient(Integer id){
         LOG.info("You start deleting patient with id {} ",id);
+        Patients patients = patientRepository.findOne(id);
+        if (patients == null){
+            throw new NotFoundException("There is no patient with this id in the DB!");
+        }
         patientRepository.delete(id);
         LOG.info("You successfully delete patient with id {} ",id);
     }
 
     @Override
     public List<DiseasesTO> findDiseaseByPatientId(Integer patientId) {
+        Patients patients = patientRepository.findOne(patientId);
+        if (patients == null){
+            throw new NotFoundException("There is no patient with this id in the DB!");
+        }
         LOG.info("You start searching diseases for patient with {} id ",patientId);
         List<DiseasesTO> listOfDiseases =  patientDiseasesRepository.getAllDiseasesByPatientId(patientId)
                     .stream().map(x -> {
@@ -109,22 +133,40 @@ public class PatientsServiceImpl implements PatientService {
                     })
                     .collect(Collectors.toList());
 
+
+        if (listOfDiseases.size() == 0){
+            throw new NotFoundException("There is no diseases for patient with this id in the DB!");
+        }
         LOG.info("You found {} diseases for patient with id {}",listOfDiseases.size(), patientId);
         return listOfDiseases;
     }
 
     @Override
     public void deletePatientDisease(Integer patientId, Integer diseaseId) {
+        Patients patients = patientRepository.findOne(patientId);
+        if (patients == null){
+            throw new NotFoundException("There is no patient with this id in the DB!");
+        }
         LOG.info("You start deleting disease with id {} for patient with {} id ",diseaseId,patientId);
        PatientsDiseases patientsDiseases = patientDiseasesRepository.findByPatientIdAndDiseaseId(patientId,diseaseId);
+        if (patientsDiseases == null){
+            throw new NotFoundException("There is no diseases for patient with this id in the DB!");
+        }
        patientDiseasesRepository.delete(patientsDiseases);
         LOG.info("You successfully delete disease with id {} for patient with {} id ",diseaseId,patientId);
     }
 
     @Override
     public void updatePatientDisease(DiseasesTO diseasesTO, Integer patientId, Integer diseaseId) {
+        Patients patients = patientRepository.findOne(patientId);
+        if (patients == null){
+            throw new NotFoundException("There is no patient with this id in the DB!");
+        }
         LOG.info("You start updating disease with id {} for patient with {} id ",diseaseId,patientId);
        PatientsDiseases patientsDiseases = patientDiseasesRepository.findByPatientIdAndDiseaseId(patientId,diseaseId);
+        if (patientsDiseases == null){
+            throw new NotFoundException("There is no diseases with this id for patient with this id in the DB!");
+        }
        if(diseasesTO.getDateOfDiagnose() != null){
            patientsDiseases.setDiagnoseDate(diseasesTO.getDateOfDiagnose());
        }

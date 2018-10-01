@@ -1,5 +1,6 @@
 package com.anakeredchieva.doctor.sheduler.api.controller;
 
+import com.anakeredchieva.doctor.sheduler.api.NotFoundException;
 import com.anakeredchieva.doctor.sheduler.services.DiseaseService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.anakeredchieva.doctor.sheduler.model.DiseasesTO;
@@ -47,7 +48,7 @@ public class PatientsApiController implements PatientsApi {
         return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
 
-    public ResponseEntity<List<PatientTO>> patientsGet() {
+    public ResponseEntity<List<PatientTO>> patientsGet() throws NotFoundException {
         return new ResponseEntity<List<PatientTO>>(patientsService.findAllPatients(), HttpStatus.OK);
     }
 

@@ -15,7 +15,7 @@ public enum PatientConverter implements Converter<Patients, PatientTO> {
                 .middleName(patientTO.getMiddleName())
                 .lastName(patientTO.getLastName())
                 .address(patientTO.getAddress())
-                .EGN(patientTO.getEgn())
+                .egn(patientTO.getEgn())
                 .email(patientTO.getEmail())
                 .phone(patientTO.getTelephone())
                 .build();

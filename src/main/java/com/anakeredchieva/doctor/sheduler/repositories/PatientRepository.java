@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface PatientRepository extends CrudRepository<Patients, Integer> {
+
+    Patients findByEgn(String egn);
 }

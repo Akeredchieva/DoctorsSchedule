@@ -5,6 +5,7 @@
  */
 package com.anakeredchieva.doctor.sheduler.api.controller;
 
+import com.anakeredchieva.doctor.sheduler.api.NotFoundException;
 import com.anakeredchieva.doctor.sheduler.model.DiseasesTO;
 import com.anakeredchieva.doctor.sheduler.model.PatientTO;
 import io.swagger.annotations.*;
@@ -38,7 +39,7 @@ public interface PatientsApi {
     @RequestMapping(value = "/patients",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
-    ResponseEntity<List<PatientTO>> patientsGet();
+    ResponseEntity<List<PatientTO>> patientsGet() throws NotFoundException;
 
 
     @ApiOperation(value = "Delete the current patient", nickname = "patientsPatientIdDelete", notes = "With this methow we will be able to delete a current patient", tags={ "Patients", })

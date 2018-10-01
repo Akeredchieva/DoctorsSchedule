@@ -8,6 +8,8 @@ import com.anakeredchieva.doctor.sheduler.model.DiseasesTO;
 import com.anakeredchieva.doctor.sheduler.repositories.DiseaseRepository;
 import com.anakeredchieva.doctor.sheduler.repositories.PatientDiseasesRepository;
 import com.anakeredchieva.doctor.sheduler.repositories.PatientRepository;
+import com.anakeredchieva.doctor.sheduler.services.exceptions.AlreadyExistException;
+import com.anakeredchieva.doctor.sheduler.services.exceptions.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -45,6 +47,10 @@ public class DiseaseServiceImpl implements DiseaseService {
             diseaseRepository.save(diseases);
         }
         Patients patient = patientRepository.findOne(patientId);
+        PatientsDiseases patientDisease = patientDiseasesRepository.findByPatientIdAndDiseaseId(patientId,diseases.getId());
+        if (patientDisease != null){
+            throw new AlreadyExistException("This disease for this patient already exist.");
+        }
         PatientsDiseases patientsDiseases = PatientsDiseases.builder()
                 .patient(patient)
                 .disease(diseases)
@@ -66,6 +72,9 @@ public class DiseaseServiceImpl implements DiseaseService {
     public List<DiseasesTO> findAllDiseases() {
         LOG.info("You start searching for all diseases in the DB");
         List<DiseasesTO> listOfDiseases = diseaseRepository.findAll().stream().map(DiseaseConverter.F::toTransfer).collect(Collectors.toList());
+        if (listOfDiseases.size() == 0){
+            throw new NotFoundException("There is no diseases in the DB!");
+        }
         LOG.info("You found {} diseases in the DB",listOfDiseases.size());
         return listOfDiseases;
     }
@@ -74,6 +83,9 @@ public class DiseaseServiceImpl implements DiseaseService {
     public void updateDisease(DiseasesTO diseasesTO, Integer diseaseId) {
         LOG.info("You start searching for disease with id {} and will start updating",diseaseId);
         Diseases disease = diseaseRepository.findOne(diseaseId);
+        if (disease == null){
+            throw new NotFoundException("This disease does not present in the DB!");
+        }
         disease.setDiseaseName(diseasesTO.getName());
         disease.setDescription(diseasesTO.getDescription());
         diseaseRepository.save(disease);

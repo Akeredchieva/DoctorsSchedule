@@ -35,7 +35,7 @@ public class Patients implements Serializable {
     private String phone;
 
     @Column(nullable = false)
-    private String EGN;
+    private String egn;
 
     @Column
     private String address;
@@ -56,61 +56,61 @@ public class Patients implements Serializable {
         this.setDoctors(new ArrayList<>());
     }
 // създава пациент без записан час,адрес и имейл
-    public Patients(String firstName, String middleName, String lastName, String EGN, List<Doctors> doctors) {
+    public Patients(String firstName, String middleName, String lastName, String egn, List<Doctors> doctors) {
         this.setFirstName(firstName);
         this.setMiddleName(middleName);
         this.setLastName(lastName);
-        this.setEgn(EGN);
+        this.setEgn(egn);
         this.setDoctors(doctors);
     }
 // създава пациент без записан час, но с имейл
-    public Patients(String firstName, String middleName, String lastName, String EGN, String email, List<Doctors> doctors) {
+    public Patients(String firstName, String middleName, String lastName, String egn, String email, List<Doctors> doctors) {
         this.setFirstName(firstName);
         this.setMiddleName(middleName);
         this.setLastName(lastName);
-        this.setEgn(EGN);
+        this.setEgn(egn);
         this.setDoctors(doctors);
         this.setEmail(email);
     }
 // създава пациент без записан час, но с имейл и адрес
-    public Patients(String firstName, String middleName, String lastName, String EGN, String address, String email, List<Doctors> doctors) {
+    public Patients(String firstName, String middleName, String lastName, String egn, String address, String email, List<Doctors> doctors) {
         this.setFirstName(firstName);
         this.setMiddleName(middleName);
         this.setLastName(lastName);
-        this.setEgn(EGN);
+        this.setEgn(egn);
         this.setDoctors(doctors);
         this.setEmail(email);
         this.setAddress(address);
     }
 //създава пациент със записан час
-    public Patients(String firstName, String middleName, String lastName, String EGN, String address, String email,
+    public Patients(String firstName, String middleName, String lastName, String egn, String address, String email,
                     List<Time> time, List<Doctors> doctors) {
         this.setFirstName(firstName);
         this.setMiddleName(middleName);
         this.setLastName(lastName);
-        this.setEgn(EGN);
+        this.setEgn(egn);
         this.setDoctors(doctors);
         this.setEmail(email);
         this.setTime(time);
         this.setAddress(address);
     }
 // създава пациент със записан час, но без имейл и адрес
-    public Patients(String firstName, String middleName, String lastName, String EGN, List<Time> time,
+    public Patients(String firstName, String middleName, String lastName, String egn, List<Time> time,
                     List<Doctors> doctors) {
         this.setFirstName(firstName);
         this.setMiddleName(middleName);
         this.setLastName(lastName);
-        this.setEgn(EGN);
+        this.setEgn(egn);
         this.setDoctors(doctors);
         this.setEmail(email);
         this.setTime(time);
     }
 // създава пациент със записан час, но без адрес
-    public Patients(String firstName, String middleName, String lastName, String EGN, String email, List<Time> time, List<Doctors> doctors) {
+    public Patients(String firstName, String middleName, String lastName, String egn, String email, List<Time> time, List<Doctors> doctors) {
         this.setFirstName(firstName);
         this.setMiddleName(middleName);
         this.setLastName(lastName);
-        this.setEgn(EGN);
+        this.setEgn(egn);
         this.setDoctors(doctors);
         this.setTime(time);
         this.setEmail(email);
@@ -145,11 +145,11 @@ public class Patients implements Serializable {
     }
 
     public String getEgn() {
-        return EGN;
+        return egn;
     }
 
     public void setEgn(String EGN) {
-        this.EGN = EGN;
+        this.egn = EGN;
     }
 
     public String getAddress() {
