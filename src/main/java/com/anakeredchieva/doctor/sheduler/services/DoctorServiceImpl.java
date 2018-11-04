@@ -23,9 +23,9 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public void createDoctor(DoctorsTO doctorsTO) {
-        LOG.info("You start creating patient with name {} {} ",doctorsTO.getFirstName(), doctorsTO.getLastName());
-        Doctors patientsValidate = doctorRepository.findByEmail(doctorsTO.getEmail());
-        if (patientsValidate != null){
+        LOG.info("You start creating doctor with name {} {} ",doctorsTO.getFirstName(), doctorsTO.getLastName());
+        Doctors doctorValidate = doctorRepository.findByEmail(doctorsTO.getEmail());
+        if (doctorValidate != null){
             throw new AlreadyExistException("This doctor already exist in the DB !");
         }
         Doctors doctors = DoctorsConverter.F.toEntity(doctorsTO);

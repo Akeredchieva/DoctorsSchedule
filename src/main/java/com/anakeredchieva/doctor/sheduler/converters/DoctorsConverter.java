@@ -15,8 +15,7 @@ public enum DoctorsConverter implements Converter<Doctors, DoctorsTO> {
                 .lastName(doctorsTO.getLastName())
                 .email(doctorsTO.getEmail())
                 .telephone(doctorsTO.getTelephone())
-                .username(doctorsTO.getUsername())
-                .password(doctorsTO.getPassword())
+                .typeOfDoctor(doctorsTO.getTypeOfDoctor())
                 .build();
     }
 
@@ -27,8 +26,7 @@ public enum DoctorsConverter implements Converter<Doctors, DoctorsTO> {
                 .lastName(doctors.getLastName())
                 .email(doctors.getEmail())
                 .telephone(doctors.getTelephone())
-                .username(doctors.getUsername())
-                .password(doctors.getPassword())
+                .typeOfDoctor(doctors.getTypeOfDoctor())
                 .build();
     }
 }

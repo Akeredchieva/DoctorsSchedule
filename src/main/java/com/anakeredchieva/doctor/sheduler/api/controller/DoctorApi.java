@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.validation.Valid;
 import java.util.List;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2018-05-06T12:51:14.120Z")
-
 @Api(value = "doctors", description = "the doctors API")
 public interface DoctorApi {
 

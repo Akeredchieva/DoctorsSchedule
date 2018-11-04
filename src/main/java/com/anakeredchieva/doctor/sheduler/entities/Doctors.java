@@ -35,6 +35,9 @@ public class Doctors implements Serializable {
     @Column(name = "password",nullable = false)
     private String password;
 
+    @Column(name = "type_of_doctor",nullable = false)
+    private String typeOfDoctor;
+
     @Column(name = "telephone")
     private String telephone;
 
@@ -123,5 +126,13 @@ public class Doctors implements Serializable {
 
     public void setPatients(List<Patients> patients) {
         this.patients = patients;
+    }
+
+    public String getTypeOfDoctor() {
+        return typeOfDoctor;
+    }
+
+    public void setTypeOfDoctor(String typeOfDoctor) {
+        this.typeOfDoctor = typeOfDoctor;
     }
 }
