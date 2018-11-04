@@ -1,6 +1,5 @@
 package com.anakeredchieva.doctor.sheduler.api.controller;
 
-import com.anakeredchieva.doctor.sheduler.model.DiseasesTO;
 import com.anakeredchieva.doctor.sheduler.model.DoctorsTO;
 import com.anakeredchieva.doctor.sheduler.model.PatientTO;
 import com.anakeredchieva.doctor.sheduler.services.DoctorService;
@@ -26,7 +25,7 @@ public class DoctorApiController implements DoctorApi {
     @Autowired
     DoctorService doctorService;
 
-    @Autowired
+    //@Autowired
     public DoctorApiController(ObjectMapper objectMapper, HttpServletRequest request) {
         this.objectMapper = objectMapper;
         this.request = request;
@@ -40,8 +39,8 @@ public class DoctorApiController implements DoctorApi {
     }
 
     @Override
-    public ResponseEntity<List<DiseasesTO>> doctorsGet() {
-        return null;
+    public ResponseEntity<List<DoctorsTO>> doctorsGet() {
+        return new ResponseEntity<List<DoctorsTO>>(doctorService.findAllDoctors(), HttpStatus.OK);
     }
 
     @Override

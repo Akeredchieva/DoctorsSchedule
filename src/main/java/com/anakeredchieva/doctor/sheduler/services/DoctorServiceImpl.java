@@ -1,14 +1,20 @@
 package com.anakeredchieva.doctor.sheduler.services;
 
 import com.anakeredchieva.doctor.sheduler.converters.DoctorsConverter;
+import com.anakeredchieva.doctor.sheduler.converters.PatientConverter;
 import com.anakeredchieva.doctor.sheduler.entities.Doctors;
 import com.anakeredchieva.doctor.sheduler.entities.Patients;
 import com.anakeredchieva.doctor.sheduler.model.DoctorsTO;
+import com.anakeredchieva.doctor.sheduler.model.PatientTO;
 import com.anakeredchieva.doctor.sheduler.repositories.DoctorRepository;
 import com.anakeredchieva.doctor.sheduler.services.exceptions.AlreadyExistException;
+import com.anakeredchieva.doctor.sheduler.services.exceptions.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class DoctorServiceImpl implements DoctorService {
@@ -30,7 +36,25 @@ public class DoctorServiceImpl implements DoctorService {
         }
         Doctors doctors = DoctorsConverter.F.toEntity(doctorsTO);
         Doctors doctor = doctorRepository.save(doctors);
-        LOG.info("You successfully create patient with name {} {} with id {}",doctor.getFirstName(), doctor.getLastName(), doctor.getId());
+        LOG.info("You successfully create doctor with name {} {} and id {}",doctor.getFirstName(), doctor.getLastName(), doctor.getId());
 
+    }
+
+    //TODO: Test it!
+    @Override
+    public List<DoctorsTO> findAllDoctors() {
+        LOG.info("You start searching for all doctors in the DB");
+        List<DoctorsTO> doctorsTO = new ArrayList<>();
+
+        doctorRepository.findAll().forEach(doctors -> {
+            doctorsTO.add(DoctorsConverter.F.toTransfer(doctors));
+//            patientTO.add(new PatientTO(patients.getId(),patients.getFirstName(),patients.getLastName(),
+//                   patients.getMiddleName(),patients.getEmail(),patients.getPhone(), patients.getAddress(),patients.getEgn() ));
+        });
+        if (doctorsTO.size() == 0){
+            throw new NotFoundException("There is no doctors in the DB!");
+        }
+        LOG.info("You found {} number of doctors",doctorsTO.size());
+        return doctorsTO;
     }
 }

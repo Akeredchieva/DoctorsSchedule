@@ -25,14 +25,14 @@ public interface DoctorApi {
             method = RequestMethod.POST)
     ResponseEntity<Void> addDoctors(@ApiParam(value = "Doctors object that needs to be added in our application " ,required=true )  @Valid @RequestBody DoctorsTO doctorsTO);
 
-    @ApiOperation(value = "GET all doctors", nickname = "doctorsGet", notes = "", response = DiseasesTO.class, responseContainer = "List", tags={ "Diseases", })
+    @ApiOperation(value = "GET all doctors", nickname = "doctorsGet", notes = "", response = DoctorsTO.class, responseContainer = "List", tags={ "Doctors", })
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "An array of diseases", response = DoctorsTO.class, responseContainer = "List"),
             @ApiResponse(code = 200, message = "Unexpected error", response = Error.class) })
     @RequestMapping(value = "/doctors",
             produces = { "application/json" },
             method = RequestMethod.GET)
-    ResponseEntity<List<DiseasesTO>> doctorsGet();
+    ResponseEntity<List<DoctorsTO>> doctorsGet();
 
     @ApiOperation(value = "Update a doctor", nickname = "doctorIdPut", notes = "With this method we want to update the information about a doctor in our application", tags={ "Doctors", })
     @ApiResponses(value = {
