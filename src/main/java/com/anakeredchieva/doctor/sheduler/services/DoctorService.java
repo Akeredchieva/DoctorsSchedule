@@ -10,6 +10,8 @@ import java.util.List;
 public interface DoctorService {
 
     void createDoctor(DoctorsTO doctorsTO);
+
+    void deleteDoctor(Integer doctorId);
     List<DoctorsTO> findAllDoctors();
 
     DoctorsTO updateDoctors(DoctorsTO body,Integer doctorId);

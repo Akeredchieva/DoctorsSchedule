@@ -52,8 +52,9 @@ public class DoctorApiController implements DoctorApi {
     }
 
     @Override
-    public ResponseEntity<Void> doctorIdDelete(Integer doctorId) {
-        return null;
+    public ResponseEntity<Void> doctorIdDelete(@ApiParam(value = "",required=true) @PathVariable("doctorId") Integer doctorId) {
+        doctorService.deleteDoctor(doctorId);
+        return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
     @Override

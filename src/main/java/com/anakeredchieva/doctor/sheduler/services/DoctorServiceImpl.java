@@ -78,4 +78,17 @@ public class DoctorServiceImpl implements DoctorService {
         LOG.info("You successfully update doctor with id {} ",doctorId);
         return doctorTO;
     }
+
+    @Override
+    public void deleteDoctor(Integer doctorId) {
+
+        LOG.info("You start deleting doctor with id {} ",doctorId);
+        Doctors doctors = doctorRepository.findOne(doctorId);
+        if (doctors == null){
+            throw new NotFoundException("There is no patient with this id in the DB!");
+        }
+        doctorRepository.delete(doctorId);
+        LOG.info("You successfully delete doctor with id {} ",doctorId);
+    }
+
 }
