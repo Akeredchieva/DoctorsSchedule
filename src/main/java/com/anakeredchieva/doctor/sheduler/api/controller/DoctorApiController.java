@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -45,8 +46,9 @@ public class DoctorApiController implements DoctorApi {
     }
 
     @Override
-    public ResponseEntity<Void> doctorIdPut(DoctorsTO body, Integer doctorId) {
-        return null;
+    public ResponseEntity<Void> doctorIdPut(@ApiParam(value = "Doctors object that needs to be added in our application ", required = true) @Valid @RequestBody DoctorsTO body, @ApiParam(value = "", required = true) @PathVariable("doctorId") Integer doctorId) {
+        DoctorsTO doctorTO = doctorService.updateDoctors(body, doctorId);
+        return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
     @Override

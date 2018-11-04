@@ -29,12 +29,6 @@ public class Doctors implements Serializable {
     @Column(name = "email",unique = true,nullable = false)
     private String email;
 
-    @Column(name = "username",unique = true,nullable = false)
-    private String username;
-
-    @Column(name = "password",nullable = false)
-    private String password;
-
     @Column(name = "type_of_doctor",nullable = false)
     private String typeOfDoctor;
 
@@ -55,16 +49,12 @@ public class Doctors implements Serializable {
         this.setFirstName(firstName);
         this.setLastName(lastName);
         this.setEmail(email);
-        this.setUsername(username);
-        this.setPassword(password);
     }
 
     public Doctors(String firstName, String lastName, String email, String username, String password, String telephone) {
         this.setFirstName(firstName);
         this.setLastName(lastName);
         this.setEmail(email);
-        this.setUsername(username);
-        this.setPassword(password);
         this.setTelephone(telephone);
     }
 
@@ -94,22 +84,6 @@ public class Doctors implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getTelephone() {

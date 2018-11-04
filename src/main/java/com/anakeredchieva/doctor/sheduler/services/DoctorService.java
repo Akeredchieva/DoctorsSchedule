@@ -11,4 +11,6 @@ public interface DoctorService {
 
     void createDoctor(DoctorsTO doctorsTO);
     List<DoctorsTO> findAllDoctors();
+
+    DoctorsTO updateDoctors(DoctorsTO body,Integer doctorId);
 }

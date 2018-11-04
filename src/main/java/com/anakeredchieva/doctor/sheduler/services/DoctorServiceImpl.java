@@ -57,4 +57,25 @@ public class DoctorServiceImpl implements DoctorService {
         LOG.info("You found {} number of doctors",doctorsTO.size());
         return doctorsTO;
     }
+
+    @Override
+    public DoctorsTO updateDoctors(DoctorsTO body, Integer doctorId) {
+        LOG.info("You start updating patient with {} id",doctorId);
+        Doctors doctors = doctorRepository.findOne(doctorId);
+        if (doctors == null){
+            throw new NotFoundException("There is no doctor with this id in the DB!");
+        }
+
+        doctors.setFirstName(body.getFirstName());
+        doctors.setLastName(body.getLastName());
+        doctors.setEmail(body.getEmail());
+        doctors.setTypeOfDoctor(body.getTypeOfDoctor());
+        doctors.setTelephone(body.getTelephone());
+
+        Doctors doctorUpdate = doctorRepository.save(doctors);
+        DoctorsTO doctorTO = DoctorsConverter.F.toTransfer(doctorUpdate);
+
+        LOG.info("You successfully update doctor with id {} ",doctorId);
+        return doctorTO;
+    }
 }
