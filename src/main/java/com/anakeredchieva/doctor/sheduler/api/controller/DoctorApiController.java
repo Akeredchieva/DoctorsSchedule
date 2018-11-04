@@ -34,6 +34,7 @@ public class DoctorApiController implements DoctorApi {
     //TODO: implement all methods.
     @Override
     public ResponseEntity<Void> addDoctors(@ApiParam(value = "Doctors object that needs to be added in our application ", required = true) @Valid @RequestBody DoctorsTO doctorsTO) {
+
         doctorService.createDoctor(doctorsTO);
         return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
